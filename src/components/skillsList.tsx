@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import escIcon from "../assets/icons8-esc-key-30.png"
 
 const tabs = ["Front End", "Back End" , "Outras"] as const;
@@ -18,10 +18,21 @@ type MenuProps = {
 const SkillList = ({setActiveTab}:MenuProps) => {
   const [activeSkillTab, setActiveSkillTab] = useState<Tab>("Front End");
 
+  useEffect(()=>{
+    const handleEsc = (event:KeyboardEvent) => {
+      if (event.key === "Escape"){
+        setActiveTab("Menu")
+      }
+    };
+
+    window.addEventListener("keydown",handleEsc);
+    return () => window.removeEventListener("keydown",handleEsc)
+  })
+
   return (
     <div className="w-screen h-screen bg-gray-800 text-white rounded-lg p-4 shadow-lg flex">
       <h1 className="font-main text-[9rem] absolute -rotate-90 top-[55%] left-[81%] font-extrabold">Skills</h1>
-      <div className="absolute top-3 right-4 flex gap-2 font-second bg-amber-50 text-black justify-center items-center px-2"
+      <div className="absolute top-3 right-4 flex gap-2 font-second bg-amber-50 text-black justify-center items-center px-2 hover:bg-red-700 hover:text-white transition-colors hover:cursor-pointer"
       onClick={()=>{setActiveTab("Menu")}}>
         <img src={escIcon} />
         <p>Voltar</p>
