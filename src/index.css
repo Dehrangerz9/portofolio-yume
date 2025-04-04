@@ -1,41 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&display=swap');
 @import "tailwindcss";
 @layer components {
   .rotating-menu {
-    background-color: white;
-    transform-style: preserve-3d;
+    perspective: 1500px;
+    perspective-origin: 50% 50%;
   }
 
   .rotating-menu ul {
     position: relative;
-    top: 20%;
-    right: -15%;
+    top: 40%;
+    right: -5%;
   }
 
   .rotating-menu li {
     --item: 1;
     position: absolute;
     left: calc(10 * var(--item));
-    transform: rotate(calc((-90deg / 6) * var(--item)));
+    transform: rotate(calc((15deg ) * var(--item)));
     transform-origin: right center;
     width: 450px;
-    border: 1px solid pink;
+    padding: 5px 25px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;    
+    
+    p:nth-child(2){
+      display:none;
+      position: relative;
+      left: 45%;
+      font-size: 0.5rem;
+    }
+   
+    &:hover{
+      cursor: pointer;
+      background-image: var(--brush);
+      background-size: cover;
+      background-position: center center;
+
+      p {
+        color: black;
+        font-weight: bold;
+      }
+
+      p:nth-child(2){
+        color: white;
+        font-size: medium;
+        background-image: var(--brush2);
+        background-size: cover;
+        background-position: center center;
+        display:flex;
+        padding: 5px 3px;
+        width: fit-content;
+        padding: 5px 25px;
+        /*border:solid 2px #ffffff;
+         border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;*/
+      }
+    }
   }
 
   .rotating-menu li:nth-child(2) {
     --item: 2;
+    transform: rotate(10deg) translateY(60px) translateX(25px);
+    align-items: baseline;
   }
 
   .rotating-menu li:nth-child(3) {
     --item: 3;
+    transform: rotate(0deg) translateY(120px) translateX(50px)
   }
 
   .rotating-menu li:nth-child(4) {
     --item: 4;
+    transform: rotate(-10deg) translateY(200px) translateX(30px)
   }
 
   .rotating-menu li:nth-child(5) {
     --item: 5;
+    transform: rotate(-15deg) translateY(270px) translateX(30px)
   }
+
+  .list-brush{
+    &:hover{
+      cursor: pointer;
+      background-image: var(--brush);
+      background-size: cover;
+      background-position: center center;
+  }}
+}
+@theme {
+  --font-main: "Bodoni Moda SC", serif;
+  --font-second: "Bona Nova SC", serif;
 }
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -50,6 +104,13 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --brush: url("src/assets/brush.svg");
+  --brush2: url("src/assets/brush-2.svg");
+
+  -webkit-user-select: none; /* Safari */
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none; /* Internet Explorer/Edge */
+user-select: none; /* Standard syntax */
 }
 
 a {
@@ -66,32 +127,17 @@ body {
   display: flex;
   min-width: 320px;
   min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  /* background-image: url("assets\ChatGPT Image Apr 3, 2025, 08_12_25 PM.png");*/
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 button {
-  border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
